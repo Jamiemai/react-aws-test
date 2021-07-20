@@ -1,0 +1,14 @@
+type Device @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  Mac_address: String
+  Name: String
+  Tags: String
+  userID: ID
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  password: String
+  Name: String
+  Devices: [Device] @connection(keyName: "byUser", fields: ["id"])
+}
